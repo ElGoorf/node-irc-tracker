@@ -8,12 +8,12 @@ This is my first ever Node.js experiment, and like all things new, I'm sure it's
 An app that streams real-time IRC channel activity to a web page. This means creating a listener bot that idles in the channel, and pushes events via sockets to the browser.
 
 ### Activity I want to display:
-* Current users and Op status
-* Standard chat events, eg:
-..* Messages
-..* Joins/Parts/Kicks/Bans etc
-..* Nick/Topic changes
-* Stats based on the above
-* Link preview
-..* List of Website URLs and titles
-..* Media gallery where appropriate
+* Current users and Op status  
+* Standard chat events, eg:  
+  * Messages  
+  * Joins/Parts/Kicks/Bans etc  
+  * Nick/Topic changes  
+* Stats based on the above  
+* Link preview  
+  * List of Website URLs and titles  
+  * Media gallery where appropriate  
