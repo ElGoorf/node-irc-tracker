@@ -7,7 +7,7 @@ This is my first ever Node.js experiment, and like all things new, I'm sure it's
 ## What It Is
 An app that streams real-time IRC channel activity to a web page. This means creating a listener bot that idles in the channel, and pushes events via sockets to the browser.
 
-### Activity I want to display:
+### Activity I want to display
 * Current users and Op status  
 * Standard chat events, eg:  
   * Messages  
@@ -17,3 +17,8 @@ An app that streams real-time IRC channel activity to a web page. This means cre
 * Link preview  
   * List of Website URLs and titles  
   * Media gallery where appropriate  
+
+## Getting Started
+```
+npm install irc
+```
