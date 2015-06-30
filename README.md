@@ -19,8 +19,8 @@ An app that streams real-time IRC channel activity to a web page. This means cre
   * Media gallery where appropriate  
 
 ## Getting Started
-```
-npm install irc
-npm install --save express@4.10.2
-npm install --save socket.io
-```
+Requirements:
+* [Node.js](https://nodejs.org/) (obviously)  
+* [MongoDB](http://mongodb.github.io/node-mongodb-native/) to store parsed chat log (overkill? we'll see...)
+
+see `package.json`
