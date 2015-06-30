@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+        .username {
+            color: blue;
+        }
+        .verb {
+            color: red;
+        }
+    </style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        socket.on('dance', function(){
+            $('#chat-log').append($('<li>').html("dance"));
+        });
+
+        socket.on('part', function(data){
+            $('#chat-log').append($('<li>').html("<span class='username'>"+data.who+"</span> has <span class='verb'>left</span>."));
+        });
+
+        socket.on('join', function(who){
+            $('#chat-log').append($('<li>').html("<span class='username'>"+who+"</span> has <span class='verb'>joined</span>."));
+        });
+
+        socket.on('kick', function(data){
+            $('#chat-log').append($('<li>').html("<span class='username'>"+data.who+"</span> was <span class='verb'>kicked</span> by <span>"+data.by+"</span>"));
+        });
+    </script>
+  </head>
+  <body>
+    <ul id="chat-log"></ul>
+  </body>
+</html>

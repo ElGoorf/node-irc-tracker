@@ -21,4 +21,6 @@ An app that streams real-time IRC channel activity to a web page. This means cre
 ## Getting Started
 ```
 npm install irc
+npm install --save express@4.10.2
+npm install --save socket.io
 ```
