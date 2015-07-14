@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <head>
+        <title>IRC Real-Time Stats</title>
+        <link rel="stylesheet" href="/css/app.css">
+    </head>
+    <body>
+        <header>
+            <h1>Live IRC Stats</h1>
+            <p>A Node.js and MongoDB experiment by <a href="http://nomybase.com" target="_blank">Hussein Duvigneau</a></p>
+        </header>
+        <section id="section-chat-log" class="section-l1">
+            <h2>Live Chat stream</h2>
+            <ul id="chat-log"></ul>
+        </section>
+        <footer>
+            Live IRC Stats by Hussein Duvigneau | <a href="http://nomybase.com" target="_blank">notmybase.com</a> | <a href="https://github.com/ElGoorf/node-irc-tracker" target="_blank">Project on GitHub</a>
+        </footer>
+        
+        <script type="text/template" id="t_chat-stream-message">
+            <li><span class='username'><%- nick %></span>: <%- rawMessage %></li>
+        </script>
+        
+        <script type="text/template" id="t_chat-stream-action">
+            <li>* <span class='username'><%- nick %></span> <%- rawAction %></li>
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/app.js"></script>
+    </body>
+</html>
