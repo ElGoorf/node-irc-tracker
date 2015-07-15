@@ -38,45 +38,36 @@ MongoClient.connect(mongoUrl, function(err, db) {
     
         var datetime = new Date();
         
-        io.emit('chat-event', {
-            datetime: datetime,
-            from:from,
-            rawAction:action
-        });
-        
-        chatLog.insert([{
+        var actionData = {
                 type: "action",
                 rawAction: action,
                 dateTime: datetime,
                 server: ircServer,
                 channel: channel,
                 nick: from
-                }]);
+                };
         
-        console.log('*%s %s', from, action);
+        io.emit('chat-event', actionData);
+        
+        chatLog.insert([actionData]);
     });
 
     bot.addListener('message', function(from, to, message) {
     
         var datetime = new Date();
-    
-        io.emit('chat-event', {
-            datetime: datetime,
-            nick:from,
-            to:to,
-            rawMessage:message
-        });
         
-        chatLog.insert([{
+        var messageData = {
                 type: "message",
                 rawMessage: message,
                 dateTime: datetime,
                 server: ircServer,
                 channel: channel,
                 nick: from
-                }]);
+                };
+    
+        io.emit('chat-event', messageData);
         
-        console.log('%s => %s: %s', from, to, message);
+        chatLog.insert([messageData]);
     
 /*
         if (to.match(/^[#&]/)) {
@@ -111,24 +102,55 @@ MongoClient.connect(mongoUrl, function(err, db) {
     bot.addListener('pm', function(nick, message) {
         console.log('Got private message from %s: %s', nick, message);
     });
+    
     bot.addListener('join', function(channel, who) {
-        io.emit('chat-live-join', who);
-        console.log('%s has joined %s', who, channel);
+        var datetime = new Date();
+        
+        var joinData = {
+                type: "join",
+                dateTime: datetime,
+                server: ircServer,
+                channel: channel,
+                nick: who
+                };
+    
+        io.emit('chat-event', joinData);
+        
+        chatLog.insert([joinData]);
     });
+    
     bot.addListener('part', function(channel, who, reason) {
-        console.log('%s has left %s: %s', who, channel, reason);
-        io.emit('chat-live-part', {
-            who:who,
-            reason:reason
-        });
+        var datetime = new Date();
+        
+        var partData = {
+                type: "part",
+                dateTime: datetime,
+                server: ircServer,
+                channel: channel,
+                nick: who,
+                reason:reason
+                };
+    
+        io.emit('chat-event', partData);
+        
+        chatLog.insert([partData]);
     });
     bot.addListener('kick', function(channel, who, by, reason) {
-        console.log('%s was kicked from %s by %s: %s', who, channel, by, reason);
-        io.emit('chat-live-kick', {
-            who:who,
-            by:by,
-            reason:reason
-        });
+        var datetime = new Date();
+        
+        var kickData = {
+                type: "kick",
+                dateTime: datetime,
+                server: ircServer,
+                channel: channel,
+                nick:who,
+                by:by,
+                reason:reason
+                };
+    
+        io.emit('chat-event', kickData);
+        
+        chatLog.insert([kickData]);
     });
 
     /* Storing data debate

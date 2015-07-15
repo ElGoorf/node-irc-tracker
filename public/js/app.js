@@ -6,30 +6,31 @@ var socket = io();
 
 var templates = {
     message : _.template($("#t_chat-stream-message").html()),
-    action : _.template($("#t_chat-stream-action").html())
+    action : _.template($("#t_chat-stream-action").html()),
+    join : _.template($("#t_chat-stream-join").html()),
+    part : _.template($("#t_chat-stream-part").html()),
+    kick : _.template($("#t_chat-stream-kick").html())
 }
 
 socket.on('chat-event', function(data){
     console.log(data);
-    $('#chat-log').append(templates.message(data));
-});
-
-socket.on('chat-live-action', function(data){
-    $('#chat-log').append(templates.action(data));
-});
-
-socket.on('chat-live-dance', function(){
-    $('#chat-log').append($('<li>').html("dance"));
-});
-
-socket.on('chat-live-part', function(data){
-    $('#chat-log').append($('<li>').html("<span class='username'>"+data.who+"</span> has <span class='verb'>left</span>."));
-});
-
-socket.on('chat-live-join', function(who){
-    $('#chat-log').append($('<li>').html("<span class='username'>"+who+"</span> has <span class='verb'>joined</span>."));
-});
-
-socket.on('chat-live-kick', function(data){
-    $('#chat-log').append($('<li>').html("<span class='username'>"+data.who+"</span> was <span class='verb'>kicked</span> by <span>"+data.by+"</span>"));
+    switch(data.type){
+        case "message":
+            $('#chat-log').append(templates.message(data));
+            break;
+        case "action":
+            $('#chat-log').append(templates.action(data));
+            break;
+        case "join":
+            $('#chat-log').append(templates.join(data));
+            break;
+        case "part":
+            $('#chat-log').append(templates.part(data));
+            break;
+        case "kick":
+            $('#chat-log').append(templates.kick(data));
+            break;
+        default:
+            console.log(data)
+    }
 });
