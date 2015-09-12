@@ -9,10 +9,16 @@
             <h1>Live IRC Stats</h1>
             <p>A Node.js and MongoDB experiment by <a href="http://nomybase.com" target="_blank">Hussein Duvigneau</a></p>
         </header>
-        <section id="section-chat-log" class="section-l1">
-            <h2>Live Chat stream</h2>
-            <ul id="chat-log"></ul>
-        </section>
+        <div id="main">
+            <section id="section-chat-log" class="section-l1">
+                <h2>Live Chat stream</h2>
+                <ul id="chat-log"></ul>
+            </section>
+            <section id="section-users" class="section-l1">
+                <h2>Users</h2>
+                <ul id="user-list"></ul>
+            </section>
+        </div>
         <footer>
             Live IRC Stats by Hussein Duvigneau | <a href="http://nomybase.com" target="_blank">notmybase.com</a> | <a href="https://github.com/ElGoorf/node-irc-tracker" target="_blank">Project on GitHub</a>
         </footer>
@@ -32,9 +38,16 @@
         <script type="text/template" id="t_chat-stream-part">
             <li>* <span class='username'><%- nick %></span> has <span class='verb'>left</span>.</li>
         </script>
-        
+
         <script type="text/template" id="t_chat-stream-kick">
             <li>! <span class='username'><%- nick %></span> was <span class='verb'>kicked</span> by <span class="username"><%- by %></span>. Reason: "<%- reason ->"</li>
+        </script>
+
+        <script type="text/template" id="t_userlist-user">
+            <li>
+                <span class="rank">[<%- rank %>]</span>
+                <span class='username'><%- nick %></span>
+            </li>
         </script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

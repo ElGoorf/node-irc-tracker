@@ -1,14 +1,8 @@
-/*
-    Document   : app
-    Created on : 05-Jul-2015, 15:59:01
-    Author     : hussein
-    Description:
-        Purpose of the stylesheet follows.
-*/
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -27,57 +21,30 @@ time, mark, audio, video {
   border: 0;
   font-size: 100%;
   font: inherit;
-  vertical-align: baseline; }
-
+  vertical-align: baseline;
+}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-  display: block; }
-
+  display: block;
+}
 body {
-  line-height: 1; }
-
+  line-height: 1;
+}
 ol, ul {
-  list-style: none; }
-
+  list-style: none;
+}
 blockquote, q {
-  quotes: none; }
-
+  quotes: none;
+}
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
-  content: none; }
-
+  content: none;
+}
 table {
   border-collapse: collapse;
-  border-spacing: 0; }
+  border-spacing: 0;
+}
 
 /* End of Reset */
-body {
-  margin: 10px 0; }
-
-header {
-  width: 100%; }
-
-#main {
-  width: 100%;
-  display: flex;
-  justify-content: space-between; }
-
-#section-chat-log {
-  flex-grow: 9; }
-  #section-chat-log #chat-log {
-    background-color: #0000cc; }
-    #section-chat-log #chat-log li {
-      color: #fff; }
-
-#section-users {
-  flex-grow: 3; }
-
-.username {
-  color: #ccc; }
-
-.verb {
-  color: #f00; }
-
-/*# sourceMappingURL=app.css.map */

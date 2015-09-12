@@ -4,7 +4,7 @@ var MongoClient = require('mongodb').MongoClient
 , assert = require('assert');
 
 var ircServer = 'irc.devhat.net';
-var channel = '#test';
+var channel = '#test2';
 
 // irc bot
 var bot = new irc.Client(ircServer, 'ElGoorf', {
@@ -12,6 +12,8 @@ var bot = new irc.Client(ircServer, 'ElGoorf', {
     debug: true,
     channels: [channel]
 });
+
+var users = [];
 
 // mongoDB connection
 var mongoUrl = 'mongodb://localhost:27017/node-irc-tracker';
@@ -137,20 +139,44 @@ MongoClient.connect(mongoUrl, function(err, db) {
     });
     bot.addListener('kick', function(channel, who, by, reason) {
         var datetime = new Date();
-        
+
         var kickData = {
-                type: "kick",
-                dateTime: datetime,
-                server: ircServer,
-                channel: channel,
-                nick:who,
-                by:by,
-                reason:reason
-                };
-    
+            type: "kick",
+            dateTime: datetime,
+            server: ircServer,
+            channel: channel,
+            nick:who,
+            by:by,
+            reason:reason
+        };
+
         io.emit('chat-event', kickData);
-        
+
         chatLog.insert([kickData]);
+    });
+
+    bot.addListener('topic', function(channel, topic, nick) {
+        var datetime = new Date();
+
+        var topicData = {
+            type: "topic",
+            dateTime: datetime,
+            server: ircServer,
+            channel: channel,
+            topic: topic,
+            by:nick,
+        };
+
+        io.emit('meta-topic', topicData);
+
+        chatLog.insert([topicData]);
+    });
+
+    bot.addListener('names', function(channel,nicks) {
+
+        users = nicks;
+
+        io.emit('meta-users', users);
     });
 
     /* Storing data debate
@@ -238,4 +264,6 @@ io.on('connection', function(client){
             }
         });
     });
+
+    io.emit('meta-users', users);
 });

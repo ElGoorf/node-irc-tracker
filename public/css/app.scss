@@ -1,0 +1,45 @@
+/*
+    Document   : app
+    Created on : 05-Jul-2015, 15:59:01
+    Author     : hussein
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@import "partials/_reset.scss";
+
+body {
+  margin: 10px 0;
+}
+
+header {
+  width: 100%;
+}
+
+#main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#section-chat-log {
+  flex-grow: 9;
+  #chat-log {
+    background-color: #0000cc;
+
+    li {
+      color: #fff;
+    }
+  }
+}
+
+#section-users {
+  flex-grow: 3;
+}
+
+.username {
+  color: #ccc;
+}
+.verb {
+  color: #f00;
+}

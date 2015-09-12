@@ -9,7 +9,8 @@ var templates = {
     action : _.template($("#t_chat-stream-action").html()),
     join : _.template($("#t_chat-stream-join").html()),
     part : _.template($("#t_chat-stream-part").html()),
-    kick : _.template($("#t_chat-stream-kick").html())
+    kick : _.template($("#t_chat-stream-kick").html()),
+    user : _.template($("#t_userlist-user").html())
 }
 
 socket.on('chat-event', function(data){
@@ -32,5 +33,17 @@ socket.on('chat-event', function(data){
             break;
         default:
             console.log(data)
+    }
+});
+
+socket.on('meta-users', function(data){
+    console.log(data);
+    for(var i = 0, l = Object.keys(data).length; i<l; i++){
+        var userData = {
+            "nick" : Object.keys(data)[i],
+            "rank" : data[Object.keys(data)[i]]
+        }
+        console.log(userData);
+        $('#user-list').append(templates.user(userData));
     }
 });
