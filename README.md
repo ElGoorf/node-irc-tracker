@@ -1,3 +1,9 @@
+# PROJECT CANNED #
+
+Since all the communities I'm part of have migrated to Slack, I've lost the drive to work on this project.
+
+Feel free to take over.
+
 # node-irc-tracker
 Node.js powered IRC tracker, streaming in real time to a web page.
 
